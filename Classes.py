@@ -14,8 +14,8 @@ class Player(pygame.sprite.Sprite):
         self.image = pygame.Surface((50, 40))
         self.image.fill(GREEN)
         self.rect = self.image.get_rect()
-        self.rect.centerx = WIDTH / 2
-        self.rect.bottom = HEIGHT - 10
+        self.rect.x = WIDTH / 2
+        self.rect.y = HEIGHT/2
         self.speedx = 0
         self.speedy = 0
     def update(self):
@@ -30,19 +30,14 @@ class Player(pygame.sprite.Sprite):
             self.speedy=-8
         if keystate[pygame.K_DOWN] or keystate[pygame.K_s]:
             self.speedy=8
-        self.speedx=vx
-        self.rect.x += self.speedx
-        self.rect.y+=self.speedy
 class env_object(pygame.sprite.Sprite):
-    def __init__(self):
+    def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.x=100
-        self.y=200
         self.image = pygame.Surface((60, 60))
         self.image.fill(RED)
         self.rect = self.image.get_rect()
-        self.rect.centerx=self.x
-        self.rect.bottom=self.y
-    def update(self): 
-        self.x+=speedx
-        self.y+=Player.speedy
+        self.rect.x=x
+        self.rect.y=y
+    def update(self,Player): 
+        self.rect.x-=Player.speedx
+        self.rect.y-=Player.speedy

@@ -17,20 +17,23 @@ pygame.display.set_caption("Shumerian nights")
 clock = pygame.time.Clock()
 all_sprites = pygame.sprite.Group()
 player = Player()
-tree=env_object()
-all_sprites.add(player)
+player1=pygame.sprite.Group()
+player1.add(player)
+tree=env_object(100,200)
+house=env_object(300,100)
 all_sprites.add(tree)
+all_sprites.add(house)
 running = True
 while running:
     clock.tick(FPS)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-
-    all_sprites.update()
-    
-    screen.fill(BLACK)
+    all_sprites.update(player)
+    player.update()
+    screen.fill(WHITE)
     all_sprites.draw(screen)
+    player1.draw(screen)
     pygame.display.flip()
 
 pygame.quit()
